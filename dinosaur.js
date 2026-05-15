@@ -30,7 +30,7 @@ function jump() {
   if (isJumping || gameOver) return;
   isJumping = true;
   verticalVelocity = 13; // initial jump impulse
-
+ 
   const jumpInterval = setInterval(() => {
     if (gameOver) {
       clearInterval(jumpInterval);
@@ -49,6 +49,9 @@ function jump() {
     dino.style.bottom = position + "px";
   }, 20);
 }
+
+
+
 
 // Move tree
 function moveTree() {
@@ -204,6 +207,7 @@ function startScore() {
     if (gameOver) return;
 
     score += 1;
+    if (score%100==0) increaseRunspeed();
     updateScoreDisplay();
   }, 100); // 0.1 seconds = 100ms
 }
@@ -236,6 +240,7 @@ function restartGame() {
   const gameOverText = document.getElementById("gameOverMessage");
   if (gameOverText) {
     gameOverText.remove();
+
   }
 
   // Show 'Restart button pressed' text if it is not there
@@ -251,10 +256,20 @@ function restartGame() {
       transform: "translate(-50%, -50%)",
     });
   }
+
 }
 
 // Add restart button event listener
+
+
 restartBtn.addEventListener("click", restartGame);
+
 
 checkCollision();
 startScore();
+
+  function increaseRunspeed(){
+
+      runSpeed+=1;
+
+  }
